@@ -1,0 +1,129 @@
+{extend name="common/base" /}
+{block name="title"}
+<title>网站配置--安晟科技</title>
+{/block}
+{block name="content"}
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li><a href="{:url('index/index')}">系统</a></li>
+            <li class="active">网站配置</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">
+        
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-blue">
+                        <span class="widget-caption">网站配置</span>
+                    </div>
+                    <div class="widget-body">
+                        <div id="horizontal-form">
+                            <form class="form-horizontal" role="form" action="" method="post">
+                                <input type="hidden" name="id" value="{$conf.id}">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">网站名称</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" placeholder="请输入网站名称" name="site_name" type="text" value="{$conf.site_name}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">网站关键字</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" placeholder="请输入网站关键字" name="keywords" type="text" value="{$conf.keywords}">
+                                    </div>
+                                </div>
+                               <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">网站说明</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" name="description" style="height:100px;resize: none;">{$conf.description}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 30px;margin-top:20px;">
+                                    <label class="col-sm-2 control-label no-padding-right" style="padding-top:2px;">是否关闭网站</label>
+                                    <div class="col-sm-6">
+                                        <label style="margin-bottom: 0;">
+                                            <input {if condition="$conf.is_close === 0"}checked="checked"{/if} name="is_close" type="radio" value="0"><span class="text">不关闭</span>
+                                        </label>
+                                        <label style="margin-bottom: 0;">
+                                            <input {if condition="$conf.is_close === 1"}checked="checked"{/if} name="is_close" type="radio" value="1"><span class="text">关闭</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 30px;">
+                                    <label class="col-sm-2 control-label no-padding-right" style="padding-top:2px;">是否显示引导页</label>
+                                    <div class="col-sm-6">
+                                        <label style="margin-bottom: 0;">
+                                            <input {if condition="$conf.is_loadding === 1"}checked="checked"{/if} name="is_loadding" type="radio" value="1"><span class="text">显示</span>
+                                        </label>
+                                        <label style="margin-bottom: 0;">
+                                            <input {if condition="$conf.is_loadding === 0"}checked="checked"{/if} name="is_loadding" type="radio" value="0"><span class="text">不显示</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 25px;">
+                                    <label class="col-sm-2 control-label no-padding-right" style="padding-top:2px;">是否开启验证码</label>
+                                    <div class="col-sm-6">
+                                        <label style="margin-bottom: 0;">
+                                            <input {if condition="$conf.code === 1"}checked="checked"{/if} name="code" type="radio" value="1"><span class="text">开启</span>
+                                        </label>
+                                        <label style="margin-bottom: 0;">
+                                            <input {if condition="$conf.code === 0"}checked="checked"{/if} name="code" type="radio" value="0"><span class="text">关闭</span>
+                                        </label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">页脚信息</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" name="footer" required="" style="height: 100px;resize: none;">{$conf.footer}</textarea>
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">备案号</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" placeholder="请输入备案号" name="record" required="" type="text" value="{$conf.record}">
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">版权</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" placeholder="请输入版权信息" name="copyright" required="" type="text" value="{$conf.copyright}">
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                </div>
+
+
+                                <!-- <div class="form-group">
+                                    <label for="group_id" class="col-sm-2 control-label no-padding-right">用户角色</label>
+                                    <div class="col-sm-6">
+                                        <select name="group_id" style="width: 100%;">
+                                            <option selected="selected" value="8">测试</option>
+                                        </select>
+                                    </div>
+                                </div>   -->
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default">保存信息</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+{/block}

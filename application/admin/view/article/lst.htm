@@ -1,0 +1,92 @@
+{extend name="common/base" /}
+{block name="title"}
+<title>文章列表</title>
+{/block}
+{block name="content"}    
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:url('index/index')}">系统</a>
+            </li>
+            {empty name="cid"}
+            <li class="active">文章管理列表</li>
+            {else /}
+            <li>
+                <a href="{:url('article/lst')}">文章管理列表</a>
+            </li>
+            <li class="active">{$type[$cid]}</li>
+            {/empty}
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">                    
+        <button type="button" tooltip="添加文章" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('add')}'"> <i class="fa fa-plus"></i> Add
+        </button>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-body">
+                        <div class="flip-scroll">
+                            <table class="table table-bordered table-hover">
+                                <thead class="">
+                                    <tr>
+                                        <th class="text-center" width="5%">ID</th>
+                                        <th class="text-left" width="10%">标题</th>
+                                        <th class="text-left" width="35%">说明</th>
+                                        <th class="text-left" width="5%">缩略图</th>
+                                        <th class="text-center" width="14%">发布时间</th>
+                                        <th class="text-center" width="10%">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">所属分类 <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    {volist name="type" id="tp" key="k"}
+                                                    <li><a href="{:url('article/lst',array('cid'=>$k))}">{$tp}</a></li>
+                                                    {/volist}
+                                                    
+                                                </ul>
+                                            </div>
+                                        </th>
+                                        <th class="text-center" width="6%">是否推荐</th>
+                                        <th class="text-center" width="15%">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {volist name="articleres" id="vo"}
+                                    <tr>
+                                        <td align="center">{$vo.id}</td>
+                                        <td align="left">{$vo.title}</td>
+                                        <td align="left">{$vo.desc}</td>
+                                        <td align="left">{if condition="$vo['thumb'] eq ''"}暂无缩略图{else/}<img src="{$vo.thumb}" style="width:50px;"/>{/if}</td>
+                                        <td align="center">{$vo.time|date='Y-m-d H:i'}</td>
+                                        <td align="center">{$type[$vo.type]}</td>
+                                        <td align="center">{if condition="$vo.is_recommend == 1"}推荐{else /}不推荐{/if}</td>
+                                        <td align="center">
+                                            <a href="{:url('article/edit',array('id'=>$vo['id']))}" class="btn btn-primary btn-sm shiny">
+                                                <i class="fa fa-edit"></i> 编辑
+                                            </a>
+                                            <a href="#" onClick="warning('确实要删除吗', '{:url('article/del',array('id'=>$vo['id']))}')" class="btn btn-danger btn-sm shiny">
+                                                <i class="fa fa-trash-o"></i> 删除
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center" style="margin-top: 20px;">
+                            {$articleres|raw}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+{/block}

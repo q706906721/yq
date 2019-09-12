@@ -1,0 +1,67 @@
+{extend name="common/base" /}
+{block name="title"}
+<title>轮播图列表</title>
+{/block}
+{block name="content"}
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:url('index/index')}">系统</a>
+            </li>
+            <li class="active">轮播图列表</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">                    
+        <button type="button" tooltip="添加栏目" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('home/add')}'"> <i class="fa fa-plus"></i> Add
+        </button>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-body">
+                        <div class="flip-scroll">
+                            <table class="table table-bordered table-hover">
+                                <thead class="">
+                                    <tr>
+                                        <th class="text-center" width="10%">ID</th>
+                                        <th class="text-left" width="15%">轮播图</th>
+                                        <th class="text-left" width="15%">跳转地址</th>
+                                        <th class="text-center" width="20%">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {volist name="banner" id="vo"}
+                                    <tr>
+                                        <td align="center">{$vo.id}</td>
+                                        <td align="left">{if condition="$vo['img'] eq ''"}暂无栏目图{else/}<img src="{$vo.img}" style="width:100px;"/>{/if}</td>
+                                        <td align="center"><a href="{$vo.url}" target="_blank">{$vo.url}</a></td>
+                                        <td align="center">
+                                            <a href="{:url('home/edit',array('id'=>$vo['id']))}" class="btn btn-primary btn-sm shiny">
+                                                <i class="fa fa-edit"></i> 编辑
+                                            </a>
+                                            <a href="#" onClick="warning('确实要删除吗', '{:url('home/del',array('id'=>$vo['id']))}')" class="btn btn-danger btn-sm shiny">
+                                                <i class="fa fa-trash-o"></i> 删除
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center" style="margin-top: 20px;">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+{/block}
